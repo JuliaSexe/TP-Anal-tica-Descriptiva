@@ -4,7 +4,7 @@
 
 Realizar clusters de clientes para segmentar campañas de marketing
 
-**Descripción deL datasets:**
+**Descripción del datasets:**
 
 _Dataset_: Brazilian E-Commerce Public Dataset by Olist [https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce].
 
@@ -22,7 +22,7 @@ Los archivos con la información son:
 - _Olist_geolocation_dataset.csv_: cada fila es un punto geográfico asociado a un prefijo de código postal. Las columnas son geolocation_zip_code_prefix, geolocation_lat, geolocation_lng, geolocation_city, geolocation_state (5 en total). Sirve para analizar por zona pero no por dirección exacta. El archivo tiene aproximadamente 1 millón de filas pero el mismo prefijo aparece varias veces. Es por eso que consideramos que sería una buena alternativa compactarlo a una sola fila por prefijo y sacar un promedio de latitud y longitud y quedarse con la ciudad o estado más frecuente o la de ese promedio (esto se realizó con promedio pero no sabemos cuál sería la mejor opción). Creemos que es una mejor alternativa también para la unión ya que el archivo de los sellers y customers cuenta con el prefijo. No tiene datos nulos.
 - _Product_category_name_translation.csv_: es la traducción de las categorías del producto. Las columnas son product_category_name y product_category_name_english (2 en total). Sirve para mostrar la categoría en inglés, pero la traducción no llega al 100% de los casos (de las 73 categorías de producto únicas, 71 cuentan con traducción).
 
-*Aclaración*: todos los archivos se encuentran cargados en GITHUB salvo Olist_geolocation_dataset.csv. Todo se puede encontrar en el link de kaggle. 
+**Aclaración**: todos los archivos se encuentran cargados en GITHUB salvo Olist_geolocation_dataset.csv. Todo se puede encontrar en el link de kaggle. 
 
 _Ventajas_: reconstrucción del ciclo punta a punta de una compra (desde el pedido hasta la evaluación). Esto permite calcular tiempos de entrega, puntualidad,  retrasos.
 Cuenta con muchas variables, como pagos (métodos, tipo, valor), descripciones de los productos, ubicación de origen (vendedor) y de destino (cliente), clientes, categorías, entre otras cosas. También tiene datos geográficos, lo que permite realizar un análisis regional.
