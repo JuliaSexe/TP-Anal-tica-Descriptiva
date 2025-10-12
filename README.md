@@ -1,4 +1,4 @@
-# Tp_Descriptiva
+# Tp Descriptiva
 
 **Proyecto:**
 
