@@ -61,8 +61,9 @@ _Diagnóstico_:
 
 _Predictivo_:
 - ¿Existen patrones de recurrencia entre los clientes?
-- ¿Cómo se diferencian los clientes en términos de ticket promedio y gasto total?
-- ¿Se observan diferencias en el comportamiento de los clientes según su localización geográfica?
+- ¿Qué características comparten los clientes de mayor valor o frecuencia de compra?
+- ¿Qué variables parecen influir más en las diferencias entre segmentos (categoría de producto, método de pago, geografía, tiempos de entrega)?
+
 
 _Prescriptivo_:
 - ¿Qué estrategia de marketing conviene aplicar en cada cluster de clientes (ej. descuentos, retención)?
