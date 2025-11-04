@@ -98,14 +98,14 @@ Identificar clusters de clientes en el e-commerce de Olist que permitan diseñar
 
 **Descripción de la estructura de carpetas del repo**: 
 - _data/raw_: incluye 8 de los 9 archivos utilizados en crudo. El último se puede encontrar en el link de Kaggle. 
-- _notebooks_: incluye un archivo con el ánalisis exploratorio inicial, ánalisis descriptivo y graficos.
+- _notebooks_: incluye un archivo con el ánalisis exploratorio inicial, ánalisis descriptivo y graficos. Se incluye un archivo para el analisis de Fact_orders y otro para el analisis de Fact_orders_items. 
 
 **Primeros hallazgos del EDA (para ambas tablas)**
 
 - _Preprocesamiento incial de los datos_:
-  - Tratamiento de outliers: En el caso de la latitud y longitud, decidimos excluirlos del analisis de outliers porque son direcciones y consideramos que no debiamos incluirlos. Analizamos los outliers de las variables cuantitativas continuas, como no son normales, aplicamos boxcox y luego buscamos los outliers con z score y umbral de 4 desviaciones estandar sobre la media. Al haber algunas variables que tienen valores negativos, aplicamos Yeo Johnson en vez de Box Cox. Luego de imputar con la mediana, pudimos ver que la cantidad de outliers queda en 0 en casi todos los casos o se reduce.
-  - Tratamiento de nulos: Pudimos ver que las columnas de titulo de la review y la review en si tienen muchos valores nulos, y como no vamos a hacer analisis de texto, decidimos eliminarlas. Por otro lado, en el resto de las columnas se rechaza que sean MCAR. Para analizar si eran MAR, realizamos una regresión. En la mayoría de los casos, no rechazamos H0 (todos los p valores eran grandes), por lo que no podíamos afirmar que los datos fueran MAR. Entonces, consideramos que al tratarse de una cantidad menor al 3% de faltantes por columna, aplicamos KNN en todos los casos porque no consideramos que el test fuera tan concluyente ya que la cantidad de datos faltantes era poca. En conclusión, aplicamos KNN en todos los casos, en las columnas no numéricas de texto imputamos con la moda y en las de fecha y hora rellenamos con NaT, que es un dato nulo pero de tiempo.
-  - Tratamiento de duplicados: Solamente nos encontramos con duplicados en el archivo de geolocation, decidimos agrupar los prefijos (códigos postales) y realizar el promedio tanto de la latitud como de la longitud. Y en cuanto a la ciudad y al estado, utilizamos el más frecuente (la moda). Realizamos esto ya que un mismo prefijo aparecia muchas veces con diferentes latitudes y longitudes y eso nos dificultaba la union y la creacion de las fact tables.
+  - **Tratamiento de outliers:** En el caso de la latitud y longitud, decidimos excluirlos del analisis de outliers porque son direcciones y consideramos que no debiamos incluirlos. Analizamos los outliers de las variables cuantitativas continuas, como no son normales, aplicamos boxcox y luego buscamos los outliers con z score y umbral de 4 desviaciones estandar sobre la media. Al haber algunas variables que tienen valores negativos, aplicamos Yeo Johnson en vez de Box Cox. Luego de imputar con la mediana, pudimos ver que la cantidad de outliers queda en 0 en casi todos los casos o se reduce.
+  - **Tratamiento de nulos:** Pudimos ver que las columnas de titulo de la review y la review en si tienen muchos valores nulos, y como no vamos a hacer analisis de texto, decidimos eliminarlas. Por otro lado, en el resto de las columnas se rechaza que sean MCAR. Para analizar si eran MAR, realizamos una regresión. En la mayoría de los casos, no rechazamos H0 (todos los p valores eran grandes), por lo que no podíamos afirmar que los datos fueran MAR. Entonces, consideramos que al tratarse de una cantidad menor al 3% de faltantes por columna, aplicamos KNN en todos los casos porque no consideramos que el test fuera tan concluyente ya que la cantidad de datos faltantes era poca. En conclusión, aplicamos KNN en todos los casos, en las columnas no numéricas de texto imputamos con la moda y en las de fecha y hora rellenamos con NaT, que es un dato nulo pero de tiempo.
+  - **Tratamiento de duplicados:** Solamente nos encontramos con duplicados en el archivo de geolocation, decidimos agrupar los prefijos (códigos postales) y realizar el promedio tanto de la latitud como de la longitud. Y en cuanto a la ciudad y al estado, utilizamos el más frecuente (la moda). Realizamos esto ya que un mismo prefijo aparecia muchas veces con diferentes latitudes y longitudes y eso nos dificultaba la union y la creacion de las fact tables.
  
 - _Análisis exploratorio inicial con visualizaciones:_
   - Consideramos que las variables están altamente correlaciones si la correlación es 0.8 o 80%. No se ven variables altamente correlacionadas, entonces no eliminamos.
@@ -126,4 +126,19 @@ Identificar clusters de clientes en el e-commerce de Olist que permitan diseñar
 
 **Preprocesamiento de datos para ML**
 
+- _Correlación:_ No hay variables altamente correlacionadas (consideramos correlación mayor a 0.8) en ninguno de los dos casos es por eso que decidimos mantener todas.
+
+-  _Encoding de variables categóricas (one-hot, ordinal encoding, etc.) con justificación:_
+   - **Fact_orders:** De las variables categoricas vamos a analizar solamente las que tengan menos de 15 categorias. En este caso, serian 'order_status' y 'payment_type_mode'. Aplicamos one hot encoder sobre dichas variables ya que estas variables son nominales. Esto significa que no hay un orden o jerarquía inherente entre las categorías (por ejemplo, 'tarjeta de crédito' no es 'mayor que' o 'menor que' 'boleto'). La codificación one-hot crea una nueva columna binaria para cada categoría única, evitando que el modelo asuma una relación ordinal que no existe.
+   - **Fact_orders_items:** En este caso, la única variable categorica con menos de 15 categorias es 'payment_type_mode'. Tambien decidimos aplicar one hot encoder por la misma razon que arriba. 
+  
+-  _Estandarización:_
+   - **Fact_orders:** En este caso, aplicamos Z Score ya que transforma los datos para que tengan media 0 y desvio 1. Sirve cuando los datos no tienen un rango fijo.
+   - **Fact_orders_items:** En este caso, tambien decidimos que lo mejor era aplicar Z Score. 
+
+-  _PCA:_
+    - **Fact_orders:** Realizamos PCA luego de estandarizar e imputar los nulos previamente y llegamos a la conclusión que, por el criterio de Kaiser, se deberian mantener los primeros 12 componentes ya que sus autovalores son > 1.
+    - **Fact_orders_items:** Basandonos en el criterio de Kaiser, en este caso se deben mantener los primeros 6 componentes principales. 
+-  
+ 
 
