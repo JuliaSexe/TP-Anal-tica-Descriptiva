@@ -125,3 +125,7 @@ Este proyecto convierte el histórico de datos de Olist en una herramienta concr
 ## ❕ Limitaciones 
 
 Queda por fuera del alcance el detalle las operaciones logísticas (tiempos de entrega, costos de envío), salvo como variables secundarias que puedan aportar información para segmentar clientes. También, se evitan los análisis del texto de las reseñas (aunque pensamos en implementar procesamiento del lenguaje natural, lo vemos poco viable, más que nada por la ausencia de datos de la base en cuanto a los títulos o descripciones de las reseñas y por el idioma) y el cálculo de distancias exactas (se calcula todo a nivel de los prefijos). Tampoco se traducirán los comentarios en portugués ni las categorías que no cuenten con traducción en el archivo de traducción, estas últimas se englobarán en una sección de ‘sin traducción’.
+
+## Tablero en Power BI
+
+Link: https://app.fabric.microsoft.com/links/klCLi1reb-?ctid=a1f50a97-21c0-49a7-a9d4-f244ebb42da7&pbi_source=linkShare
