@@ -128,4 +128,4 @@ Queda por fuera del alcance el detalle las operaciones logísticas (tiempos de e
 
 ## 🕹️ Tablero en Power BI
 
-Link: https://app.fabric.microsoft.com/links/klCLi1reb-?ctid=a1f50a97-21c0-49a7-a9d4-f244ebb42da7&pbi_source=linkShare
+Link: [Tablero Olist](https://app.fabric.microsoft.com/links/klCLi1reb-?ctid=a1f50a97-21c0-49a7-a9d4-f244ebb42da7&pbi_source=linkShare)
